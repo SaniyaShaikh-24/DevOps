@@ -1,0 +1,356 @@
+LAB@DESKTOP-HR6M514 MINGW64 /d/MSB/DevOps
+$ ssh -i "Key_Master.pem" ubuntu@ec2-18-225-8-15.us-east-2.compute.amazonaws.com
+The authenticity of host 'ec2-18-225-8-15.us-east-2.compute.amazonaws.com (18.225.8.15)' can't be established.
+ED25519 key fingerprint is SHA256:lAFHKYidW8V2MafAsYPkI5kFNN9lPYXJ5yefJORhl7s.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-18-225-8-15.us-east-2.compute.amazonaws.com' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 5.4.0-1092-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Jan 24 06:38:48 UTC 2023
+
+  System load:  0.76              Processes:           101
+  Usage of /:   21.8% of 7.57GB   Users logged in:     0
+  Memory usage: 23%               IP address for eth0: 172.31.41.95
+  Swap usage:   0%
+
+ * Ubuntu Pro delivers the most comprehensive open source security and
+   compliance features.
+
+   https://ubuntu.com/aws/pro
+
+38 updates can be applied immediately.
+35 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '20.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Mon Jan 23 11:57:14 2023 from 223.236.136.40
+ubuntu@ip-172-31-41-95:~$ sudo -i
+root@ip-172-31-41-95:~# status
+
+Command 'status' not found, did you mean:
+
+  command 'statup' from snap statup (0.79.91)
+  command 'states' from deb enscript
+  command 'qstatus' from deb gridengine-client
+
+See 'snap info <snapname>' for additional versions.
+
+root@ip-172-31-41-95:~# su malu
+malu@ip-172-31-41-95:/root$ cd
+malu@ip-172-31-41-95:~$ pwd
+/home/malu
+malu@ip-172-31-41-95:~$ ansible all -i myHost -m ping
+172.31.37.49 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+malu@ip-172-31-41-95:~$ ansible-playbook -i myHost mySam.yml
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [172.31.37.49]
+
+TASK [Install Apache2] *********************************************************
+ok: [172.31.37.49]
+
+PLAY RECAP *********************************************************************
+172.31.37.49               : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+malu@ip-172-31-41-95:~$ exit
+exit
+root@ip-172-31-41-95:~# su malu
+malu@ip-172-31-41-95:/root$ cd
+malu@ip-172-31-41-95:~$ git clone https://github.com/BurlaManisha/MyNwRepository.git
+Cloning into 'MyNwRepository'...
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 3 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+malu@ip-172-31-41-95:~$ ls
+MyNwRepository  myHost  mySam.yml
+malu@ip-172-31-41-95:~$ cd MyNwRepository
+malu@ip-172-31-41-95:~/MyNwRepository$ ls
+README.md
+malu@ip-172-31-41-95:~/MyNwRepository$ git pull
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 4 (delta 0), reused 4 (delta 0), pack-reused 0
+Unpacking objects: 100% (4/4), done.
+From https://github.com/BurlaManisha/MyNwRepository
+   3332256..2e151e6  main       -> origin/main
+Updating 3332256..2e151e6
+Fast-forward
+ myHost    | 1 +
+ mySam.yml | 8 ++++++++
+ 2 files changed, 9 insertions(+)
+ create mode 100644 myHost
+ create mode 100644 mySam.yml
+malu@ip-172-31-41-95:~/MyNwRepository$ ls
+README.md  myHost  mySam.yml
+malu@ip-172-31-41-95:~/MyNwRepository$ ansible -i myHost -m ping
+usage: ansible [-h] [--version] [-v] [-b] [--become-method BECOME_METHOD]
+               [--become-user BECOME_USER] [-K] [-i INVENTORY] [--list-hosts]
+               [-l SUBSET] [-P POLL_INTERVAL] [-B SECONDS] [-o] [-t TREE] [-k]
+               [--private-key PRIVATE_KEY_FILE] [-u REMOTE_USER]
+               [-c CONNECTION] [-T TIMEOUT]
+               [--ssh-common-args SSH_COMMON_ARGS]
+               [--sftp-extra-args SFTP_EXTRA_ARGS]
+               [--scp-extra-args SCP_EXTRA_ARGS]
+               [--ssh-extra-args SSH_EXTRA_ARGS] [-C] [--syntax-check] [-D]
+               [-e EXTRA_VARS] [--vault-id VAULT_IDS]
+               [--ask-vault-pass | --vault-password-file VAULT_PASSWORD_FILES]
+               [-f FORKS] [-M MODULE_PATH] [--playbook-dir BASEDIR]
+               [-a MODULE_ARGS] [-m MODULE_NAME]
+               pattern
+ansible: error: too few arguments
+malu@ip-172-31-41-95:~/MyNwRepository$ ansible-playbook -i myHost MSam.yml
+ERROR! the playbook: MSam.yml could not be found
+malu@ip-172-31-41-95:~/MyNwRepository$ ansible-playbook -i myHost mySam.yml
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [172.31.37.49]
+
+TASK [I want to install apache2] ***********************************************
+ok: [172.31.37.49]
+
+PLAY RECAP *********************************************************************
+172.31.37.49               : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+malu@ip-172-31-41-95:~/MyNwRepository$ ansible all -i myHost -m ping
+172.31.37.49 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+malu@ip-172-31-41-95:~/MyNwRepository$ git pull
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 3 (delta 2), reused 3 (delta 2), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/BurlaManisha/MyNwRepository
+   2e151e6..902e326  main       -> origin/main
+Updating 2e151e6..902e326
+Fast-forward
+ mySam.yml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+malu@ip-172-31-41-95:~/MyNwRepository$ ansible all -i myHost -m ping
+172.31.37.49 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+malu@ip-172-31-41-95:~/MyNwRepository$ ansible-playbook -i myHost mySam.yml
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [172.31.37.49]
+
+TASK [I want to install apache2] ***********************************************
+changed: [172.31.37.49]
+
+PLAY RECAP *********************************************************************
+172.31.37.49               : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+malu@ip-172-31-41-95:~/MyNwRepository$ git pull
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 3 (delta 2), reused 3 (delta 2), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/BurlaManisha/MyNwRepository
+   902e326..d306011  main       -> origin/main
+Updating 902e326..d306011
+Fast-forward
+ mySam.yml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+malu@ip-172-31-41-95:~/MyNwRepository$ ansible-playbook -i myHost mySam.yml
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [172.31.37.49]
+
+TASK [I want to install apache2] ***********************************************
+changed: [172.31.37.49]
+
+PLAY RECAP *********************************************************************
+172.31.37.49               : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+malu@ip-172-31-41-95:~/MyNwRepository$ exit
+exit
+root@ip-172-31-41-95:~# ssh-copy-id 172.31.38.181
+/usr/bin/ssh-copy-id: ERROR: No identities found
+root@ip-172-31-41-95:~# ssh-copy-id 172.31.38.181
+/usr/bin/ssh-copy-id: ERROR: No identities found
+root@ip-172-31-41-95:~# ssh-copy-id 172.31.38.57
+/usr/bin/ssh-copy-id: ERROR: No identities found
+root@ip-172-31-41-95:~# su malu
+malu@ip-172-31-41-95:/root$ cd
+malu@ip-172-31-41-95:~$ ssh-copy-id 172.31.38.57
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/malu/.ssh/id_rsa.pub"
+The authenticity of host '172.31.38.57 (172.31.38.57)' can't be established.
+ECDSA key fingerprint is SHA256:D7A2UgrFftJclc61DDt8nhc1sXDcGEOxgHMrZue4s50.
+Are you sure you want to continue connecting (yes/no)? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+malu@172.31.38.57's password:
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh '172.31.38.57'"
+and check to make sure that only the key(s) you wanted were added.
+
+malu@ip-172-31-41-95:~$ ssh 172.31.38.57
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux 2 AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-2/
+[malu@ip-172-31-38-57 ~]$ git pull
+-bash: git: command not found
+[malu@ip-172-31-38-57 ~]$ ls
+[malu@ip-172-31-38-57 ~]$ ls
+[malu@ip-172-31-38-57 ~]$ exit
+logout
+Connection to 172.31.38.57 closed.
+malu@ip-172-31-41-95:~$ ls
+MyNwRepository  myHost  mySam.yml
+malu@ip-172-31-41-95:~$ cd MyNwRepository
+malu@ip-172-31-41-95:~/MyNwRepository$ ls
+README.md  myHost  mySam.yml
+malu@ip-172-31-41-95:~/MyNwRepository$ ansible all -i myHost -m ping
+172.31.37.49 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+malu@ip-172-31-41-95:~/MyNwRepository$ ansible all -i myHost -m ping
+172.31.37.49 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+malu@ip-172-31-41-95:~/MyNwRepository$ git pull
+remote: Enumerating objects: 9, done.
+remote: Counting objects: 100% (9/9), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 6 (delta 2), reused 6 (delta 2), pack-reused 0
+Unpacking objects: 100% (6/6), done.
+From https://github.com/BurlaManisha/MyNwRepository
+   d306011..4929ddd  main       -> origin/main
+Updating d306011..4929ddd
+Fast-forward
+ myHost    | 3 ++-
+ mySam.yml | 3 ++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+malu@ip-172-31-41-95:~/MyNwRepository$ ansible all -i myHost -m ping
+172.31.37.49 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+[WARNING]: Platform linux on host 172.31.38.57 is using the discovered Python
+interpreter at /usr/bin/python, but future installation of another Python
+interpreter could change this. See https://docs.ansible.com/ansible/2.9/referen
+ce_appendices/interpreter_discovery.html for more information.
+172.31.38.57 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+malu@ip-172-31-41-95:~/MyNwRepository$ ansible-playbook -i myHost mySam.yml
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [172.31.37.49]
+[WARNING]: Platform linux on host 172.31.38.57 is using the discovered Python
+interpreter at /usr/bin/python, but future installation of another Python
+interpreter could change this. See https://docs.ansible.com/ansible/2.9/referen
+ce_appendices/interpreter_discovery.html for more information.
+ok: [172.31.38.57]
+
+TASK [I want to install apache2] ***********************************************
+skipping: [172.31.38.57]
+ok: [172.31.37.49]
+
+PLAY RECAP *********************************************************************
+172.31.37.49               : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+172.31.38.57               : ok=1    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+
+malu@ip-172-31-41-95:~/MyNwRepository$ ansible-playbook -i myHost mySam.yml
+
+PLAY [all] *************************************************************************************************
+
+TASK [Gathering Facts] *************************************************************************************
+ok: [172.31.37.49]
+[WARNING]: Platform linux on host 172.31.38.57 is using the discovered Python interpreter at
+/usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+ok: [172.31.38.57]
+
+TASK [I want to install apache2] ***************************************************************************
+skipping: [172.31.38.57]
+ok: [172.31.37.49]
+
+PLAY RECAP *************************************************************************************************
+172.31.37.49               : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+172.31.38.57               : ok=1    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+
+malu@ip-172-31-41-95:~/MyNwRepository$ ancible all -i myHost -m setup -a "filter=*family*"
+
+Command 'ancible' not found, did you mean:
+
+  command 'ansible' from deb ansible
+
+Try: apt install <deb name>
+
+malu@ip-172-31-41-95:~/MyNwRepository$ ansible all -i myHost -m setup -a "filter=*family*"
+172.31.37.49 | SUCCESS => {
+    "ansible_facts": {
+        "ansible_os_family": "Debian",
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false
+}
+[WARNING]: Platform linux on host 172.31.38.57 is using the discovered Python interpreter at
+/usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+172.31.38.57 | SUCCESS => {
+    "ansible_facts": {
+        "ansible_os_family": "RedHat",
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false
+}
+malu@ip-172-31-41-95:~/MyNwRepository$ 

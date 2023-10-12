@@ -1,0 +1,400 @@
+
+SHREE@DESKTOP-8I6LDKP MINGW64 ~/Downloads
+$ ssh -i "Key_Master.pem" ubuntu@ec2-18-191-28-181.us-east-2.compute.amazonaws.com
+The authenticity of host 'ec2-18-191-28-181.us-east-2.compute.amazonaws.com (18.191.28.181)' can't be established.
+ED25519 key fingerprint is SHA256:lAFHKYidW8V2MafAsYPkI5kFNN9lPYXJ5yefJORhl7s.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-18-191-28-181.us-east-2.compute.amazonaws.com' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 5.4.0-1092-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Mon Jan 23 11:57:13 UTC 2023
+
+  System load:  0.12              Processes:           97
+  Usage of /:   16.4% of 7.57GB   Users logged in:     0
+  Memory usage: 19%               IP address for eth0: 172.31.41.95
+  Swap usage:   0%
+
+0 updates can be applied immediately.
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@ip-172-31-41-95:~$ sudo -i
+root@ip-172-31-41-95:~# apt-get update
+Hit:1 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic InRelease
+Get:2 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates InRelease [88.7 kB]
+Get:3 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-backports InRelease [83.3 kB]
+Get:4 http://security.ubuntu.com/ubuntu bionic-security InRelease [88.7 kB]
+Get:5 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/universe amd64 Packages [8570 kB]
+Get:6 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/universe Translation-en [4941 kB]
+Get:7 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/multiverse amd64 Packages [151 kB]
+Get:8 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/multiverse Translation-en [108 kB]
+Get:9 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 Packages [2874 kB]
+Get:10 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/main Translation-en [525 kB]
+Get:11 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/restricted amd64 Packages [1113 kB]
+Get:12 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/restricted Translation-en [154 kB]
+Get:13 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/universe amd64 Packages [1868 kB]
+Get:14 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/universe Translation-en [404 kB]
+Get:15 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/multiverse amd64 Packages [25.6 kB]
+Get:16 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/multiverse Translation-en [6088 B]
+Get:17 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-backports/main amd64 Packages [53.3 kB]
+Get:18 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-backports/main Translation-en [14.6 kB]
+Get:19 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-backports/universe amd64 Packages [18.1 kB]
+Get:20 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-backports/universe Translation-en [8668 B]
+Get:21 http://security.ubuntu.com/ubuntu bionic-security/main amd64 Packages [2541 kB]
+Get:22 http://security.ubuntu.com/ubuntu bionic-security/main Translation-en [439 kB]
+Get:23 http://security.ubuntu.com/ubuntu bionic-security/restricted amd64 Packages [1082 kB]
+Get:24 http://security.ubuntu.com/ubuntu bionic-security/restricted Translation-en [150 kB]
+Get:25 http://security.ubuntu.com/ubuntu bionic-security/universe amd64 Packages [1256 kB]
+Get:26 http://security.ubuntu.com/ubuntu bionic-security/universe Translation-en [291 kB]
+Get:27 http://security.ubuntu.com/ubuntu bionic-security/multiverse amd64 Packages [19.1 kB]
+Get:28 http://security.ubuntu.com/ubuntu bionic-security/multiverse Translation-en [3908 B]
+Fetched 26.9 MB in 6s (4674 kB/s)
+Reading package lists... Done
+root@ip-172-31-41-95:~# adduser malu
+Adding user `malu' ...
+Adding new group `malu' (1001) ...
+Adding new user `malu' (1001) with group `malu' ...
+Creating home directory `/home/malu' ...
+Copying files from `/etc/skel' ...
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+Changing the user information for malu
+Enter the new value, or press ENTER for the default
+        Full Name []:
+        Room Number []:
+        Work Phone []:
+        Home Phone []:
+        Other []:
+Is the information correct? [Y/n] y
+root@ip-172-31-41-95:~# visudo
+root@ip-172-31-41-95:~# vi /etc/ssh/sshd_config
+root@ip-172-31-41-95:~# service ssh restart
+root@ip-172-31-41-95:~# sudo apt-add-repository ppa:ansible/ansible
+ Ansible is a radically simple IT automation platform that makes your applications and systems easier to deploy. Avoid writing scripts or custom code to deploy and update your applications— automate in a language that approaches plain English, using SSH, with no agents to install on remote systems.
+
+http://ansible.com/
+
+If you face any issues while installing Ansible PPA, file an issue here:
+https://github.com/ansible-community/ppa/issues
+ More info: https://launchpad.net/~ansible/+archive/ubuntu/ansible
+Press [ENTER] to continue or Ctrl-c to cancel adding it.
+
+Hit:1 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic InRelease
+Hit:2 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates InRelease
+Hit:3 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-backports InRelease
+Get:4 http://ppa.launchpad.net/ansible/ansible/ubuntu bionic InRelease [15.9 kB]
+Hit:5 http://security.ubuntu.com/ubuntu bionic-security InRelease
+Get:6 http://ppa.launchpad.net/ansible/ansible/ubuntu bionic/main amd64 Packages [704 B]
+Get:7 http://ppa.launchpad.net/ansible/ansible/ubuntu bionic/main Translation-en [472 B]
+Fetched 17.1 kB in 1s (22.4 kB/s)
+Reading package lists... Done
+root@ip-172-31-41-95:~# sudo apt update
+Hit:1 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic InRelease
+Hit:2 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates InRelease
+Hit:3 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-backports InRelease
+Hit:4 http://security.ubuntu.com/ubuntu bionic-security InRelease
+Hit:5 http://ppa.launchpad.net/ansible/ansible/ubuntu bionic InRelease
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+35 packages can be upgraded. Run 'apt list --upgradable' to see them.
+root@ip-172-31-41-95:~# sudo apt install ansible
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  libpython-stdlib libpython2.7-minimal libpython2.7-stdlib python
+  python-asn1crypto python-cffi-backend python-crypto python-cryptography
+  python-enum34 python-httplib2 python-idna python-ipaddress python-jinja2
+  python-markupsafe python-minimal python-paramiko python-pkg-resources
+  python-pyasn1 python-setuptools python-six python-yaml python2.7
+  python2.7-minimal sshpass
+Suggested packages:
+  python-doc python-tk python-crypto-doc python-cryptography-doc
+  python-cryptography-vectors python-enum34-doc python-jinja2-doc
+  python-gssapi python-setuptools-doc python2.7-doc binutils binfmt-support
+The following NEW packages will be installed:
+  ansible libpython-stdlib libpython2.7-minimal libpython2.7-stdlib python
+  python-asn1crypto python-cffi-backend python-crypto python-cryptography
+  python-enum34 python-httplib2 python-idna python-ipaddress python-jinja2
+  python-markupsafe python-minimal python-paramiko python-pkg-resources
+  python-pyasn1 python-setuptools python-six python-yaml python2.7
+  python2.7-minimal sshpass
+0 upgraded, 25 newly installed, 0 to remove and 35 not upgraded.
+Need to get 11.4 MB of archives.
+After this operation, 83.6 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libpython2.7-minimal amd64 2.7.17-1~18.04ubuntu1.10 [336 kB]
+Get:2 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 python2.7-minimal amd64 2.7.17-1~18.04ubuntu1.10 [1290 kB]
+Get:3 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 python-minimal amd64 2.7.15~rc1-1 [28.1 kB]
+Get:4 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libpython2.7-stdlib amd64 2.7.17-1~18.04ubuntu1.10 [1917 kB]
+Get:5 http://security.ubuntu.com/ubuntu bionic-security/main amd64 python-pkg-resources all 39.0.1-2ubuntu0.1 [128 kB]
+Get:6 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 python2.7 amd64 2.7.17-1~18.04ubuntu1.10 [248 kB]
+Get:7 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 libpython-stdlib amd64 2.7.15~rc1-1 [7620 B]
+Get:8 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 python amd64 2.7.15~rc1-1 [140 kB]
+Get:9 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 python-markupsafe amd64 1.0-1build1 [13.0 kB]
+Get:10 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 python-jinja2 all 2.10-1ubuntu0.18.04.1 [94.8 kB]
+Get:11 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 python-yaml amd64 3.12-1build2 [115 kB]
+Get:12 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 python-asn1crypto all 0.24.0-1 [72.7 kB]
+Get:13 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 python-cffi-backend amd64 1.11.5-1 [63.4 kB]
+Get:14 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 python-enum34 all 1.1.6-2 [34.8 kB]
+Get:15 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 python-idna all 2.6-1 [32.4 kB]
+Get:16 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 python-ipaddress all 1.0.17-1 [18.2 kB]
+Get:17 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 python-six all 1.11.0-2 [11.3 kB]
+Get:18 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 python-cryptography amd64 2.1.4-1ubuntu1.4 [276 kB]
+Get:19 http://security.ubuntu.com/ubuntu bionic-security/main amd64 python-setuptools all 39.0.1-2ubuntu0.1 [329 kB]
+Get:20 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 python-pyasn1 all 0.4.2-3 [46.7 kB]
+Get:21 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 python-paramiko all 2.0.0-1ubuntu1.3 [110 kB]
+Get:22 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 python-httplib2 all 0.9.2+dfsg-1ubuntu0.3 [34.9 kB]
+Get:23 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 python-crypto amd64 2.6.1-8ubuntu2 [244 kB]
+Get:24 http://ppa.launchpad.net/ansible/ansible/ubuntu bionic/main amd64 ansible all 2.9.27-1ppa~bionic [5804 kB]
+Get:25 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/universe amd64 sshpass amd64 1.06-1 [10.5 kB]
+Fetched 11.4 MB in 2s (7104 kB/s)
+Selecting previously unselected package libpython2.7-minimal:amd64.
+(Reading database ... 58135 files and directories currently installed.)
+Preparing to unpack .../0-libpython2.7-minimal_2.7.17-1~18.04ubuntu1.10_amd64.deb ...
+Unpacking libpython2.7-minimal:amd64 (2.7.17-1~18.04ubuntu1.10) ...
+Selecting previously unselected package python2.7-minimal.
+Preparing to unpack .../1-python2.7-minimal_2.7.17-1~18.04ubuntu1.10_amd64.deb ...
+Unpacking python2.7-minimal (2.7.17-1~18.04ubuntu1.10) ...
+Selecting previously unselected package python-minimal.
+Preparing to unpack .../2-python-minimal_2.7.15~rc1-1_amd64.deb ...
+Unpacking python-minimal (2.7.15~rc1-1) ...
+Selecting previously unselected package libpython2.7-stdlib:amd64.
+Preparing to unpack .../3-libpython2.7-stdlib_2.7.17-1~18.04ubuntu1.10_amd64.deb ...
+Unpacking libpython2.7-stdlib:amd64 (2.7.17-1~18.04ubuntu1.10) ...
+Selecting previously unselected package python2.7.
+Preparing to unpack .../4-python2.7_2.7.17-1~18.04ubuntu1.10_amd64.deb ...
+Unpacking python2.7 (2.7.17-1~18.04ubuntu1.10) ...
+Selecting previously unselected package libpython-stdlib:amd64.
+Preparing to unpack .../5-libpython-stdlib_2.7.15~rc1-1_amd64.deb ...
+Unpacking libpython-stdlib:amd64 (2.7.15~rc1-1) ...
+Setting up libpython2.7-minimal:amd64 (2.7.17-1~18.04ubuntu1.10) ...
+Setting up python2.7-minimal (2.7.17-1~18.04ubuntu1.10) ...
+Linking and byte-compiling packages for runtime python2.7...
+Setting up python-minimal (2.7.15~rc1-1) ...
+Selecting previously unselected package python.
+(Reading database ... 58883 files and directories currently installed.)
+Preparing to unpack .../00-python_2.7.15~rc1-1_amd64.deb ...
+Unpacking python (2.7.15~rc1-1) ...
+Selecting previously unselected package python-markupsafe.
+Preparing to unpack .../01-python-markupsafe_1.0-1build1_amd64.deb ...
+Unpacking python-markupsafe (1.0-1build1) ...
+Selecting previously unselected package python-jinja2.
+Preparing to unpack .../02-python-jinja2_2.10-1ubuntu0.18.04.1_all.deb ...
+Unpacking python-jinja2 (2.10-1ubuntu0.18.04.1) ...
+Selecting previously unselected package python-yaml.
+Preparing to unpack .../03-python-yaml_3.12-1build2_amd64.deb ...
+Unpacking python-yaml (3.12-1build2) ...
+Selecting previously unselected package python-asn1crypto.
+Preparing to unpack .../04-python-asn1crypto_0.24.0-1_all.deb ...
+Unpacking python-asn1crypto (0.24.0-1) ...
+Selecting previously unselected package python-cffi-backend.
+Preparing to unpack .../05-python-cffi-backend_1.11.5-1_amd64.deb ...
+Unpacking python-cffi-backend (1.11.5-1) ...
+Selecting previously unselected package python-enum34.
+Preparing to unpack .../06-python-enum34_1.1.6-2_all.deb ...
+Unpacking python-enum34 (1.1.6-2) ...
+Selecting previously unselected package python-idna.
+Preparing to unpack .../07-python-idna_2.6-1_all.deb ...
+Unpacking python-idna (2.6-1) ...
+Selecting previously unselected package python-ipaddress.
+Preparing to unpack .../08-python-ipaddress_1.0.17-1_all.deb ...
+Unpacking python-ipaddress (1.0.17-1) ...
+Selecting previously unselected package python-six.
+Preparing to unpack .../09-python-six_1.11.0-2_all.deb ...
+Unpacking python-six (1.11.0-2) ...
+Selecting previously unselected package python-cryptography.
+Preparing to unpack .../10-python-cryptography_2.1.4-1ubuntu1.4_amd64.deb ...
+Unpacking python-cryptography (2.1.4-1ubuntu1.4) ...
+Selecting previously unselected package python-pyasn1.
+Preparing to unpack .../11-python-pyasn1_0.4.2-3_all.deb ...
+Unpacking python-pyasn1 (0.4.2-3) ...
+Selecting previously unselected package python-paramiko.
+Preparing to unpack .../12-python-paramiko_2.0.0-1ubuntu1.3_all.deb ...
+Unpacking python-paramiko (2.0.0-1ubuntu1.3) ...
+Selecting previously unselected package python-httplib2.
+Preparing to unpack .../13-python-httplib2_0.9.2+dfsg-1ubuntu0.3_all.deb ...
+Unpacking python-httplib2 (0.9.2+dfsg-1ubuntu0.3) ...
+Selecting previously unselected package python-crypto.
+Preparing to unpack .../14-python-crypto_2.6.1-8ubuntu2_amd64.deb ...
+Unpacking python-crypto (2.6.1-8ubuntu2) ...
+Selecting previously unselected package python-pkg-resources.
+Preparing to unpack .../15-python-pkg-resources_39.0.1-2ubuntu0.1_all.deb ...
+Unpacking python-pkg-resources (39.0.1-2ubuntu0.1) ...
+Selecting previously unselected package python-setuptools.
+Preparing to unpack .../16-python-setuptools_39.0.1-2ubuntu0.1_all.deb ...
+Unpacking python-setuptools (39.0.1-2ubuntu0.1) ...
+Selecting previously unselected package sshpass.
+Preparing to unpack .../17-sshpass_1.06-1_amd64.deb ...
+Unpacking sshpass (1.06-1) ...
+Selecting previously unselected package ansible.
+Preparing to unpack .../18-ansible_2.9.27-1ppa~bionic_all.deb ...
+Unpacking ansible (2.9.27-1ppa~bionic) ...
+Setting up sshpass (1.06-1) ...
+Setting up libpython2.7-stdlib:amd64 (2.7.17-1~18.04ubuntu1.10) ...
+Setting up python2.7 (2.7.17-1~18.04ubuntu1.10) ...
+Setting up libpython-stdlib:amd64 (2.7.15~rc1-1) ...
+Setting up python (2.7.15~rc1-1) ...
+Setting up python-idna (2.6-1) ...
+Setting up python-yaml (3.12-1build2) ...
+Setting up python-asn1crypto (0.24.0-1) ...
+Setting up python-crypto (2.6.1-8ubuntu2) ...
+Setting up python-pyasn1 (0.4.2-3) ...
+Setting up python-pkg-resources (39.0.1-2ubuntu0.1) ...
+Setting up python-markupsafe (1.0-1build1) ...
+Setting up python-httplib2 (0.9.2+dfsg-1ubuntu0.3) ...
+Setting up python-cffi-backend (1.11.5-1) ...
+Setting up python-six (1.11.0-2) ...
+Setting up python-enum34 (1.1.6-2) ...
+Setting up python-ipaddress (1.0.17-1) ...
+Setting up python-setuptools (39.0.1-2ubuntu0.1) ...
+Setting up python-jinja2 (2.10-1ubuntu0.18.04.1) ...
+Setting up python-cryptography (2.1.4-1ubuntu1.4) ...
+Setting up python-paramiko (2.0.0-1ubuntu1.3) ...
+Setting up ansible (2.9.27-1ppa~bionic) ...
+Processing triggers for mime-support (3.60ubuntu1) ...
+Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+root@ip-172-31-41-95:~# su malu
+malu@ip-172-31-41-95:/root$ cd
+malu@ip-172-31-41-95:~$ cmd
+
+Command 'cmd' not found, but there are 16 similar ones.
+
+malu@ip-172-31-41-95:~$ cwd
+
+Command 'cwd' not found, did you mean:
+
+  command 'cwr' from snap cwr (0.4.2)
+  command 'pwd' from deb coreutils
+  command 'cw' from deb cw
+  command 'cdw' from deb cdw
+  command 'xwd' from deb x11-apps
+  command 'cwm' from deb swap-cwm
+  command 'gwd' from deb geneweb
+
+See 'snap info <snapname>' for additional versions.
+
+malu@ip-172-31-41-95:~$ pwd
+/home/malu
+malu@ip-172-31-41-95:~$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/malu/.ssh/id_rsa):
+Created directory '/home/malu/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/malu/.ssh/id_rsa.
+Your public key has been saved in /home/malu/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:3w1n01Wq57nAX5tK3QYE++ijhUSyjH5pl/DsVSZO5ZU malu@ip-172-31-41-95
+The key's randomart image is:
++---[RSA 2048]----+
+|            .   .|
+|             o .o|
+|        . . . +Eo|
+|       o +   B o.|
+|      . S . * @ .|
+|     .   B O @.+.|
+|      . + B X.+.+|
+|       o o +.+ +o|
+|          o  .+o |
++----[SHA256]-----+
+malu@ip-172-31-41-95:~$ ssh-copy-id 172.31.37.49
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/malu/.ssh/id_rsa.pub"
+The authenticity of host '172.31.37.49 (172.31.37.49)' can't be established.
+ECDSA key fingerprint is SHA256:5AGq/wNWwAWYeukmgu8OW9S6UtxcZXs9Rrp/EFf8ixE.
+Are you sure you want to continue connecting (yes/no)? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+malu@172.31.37.49's password:
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh '172.31.37.49'"
+and check to make sure that only the key(s) you wanted were added.
+
+malu@ip-172-31-41-95:~$ ssh
+usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
+           [-D [bind_address:]port] [-E log_file] [-e escape_char]
+           [-F configfile] [-I pkcs11] [-i identity_file]
+           [-J [user@]host[:port]] [-L address] [-l login_name] [-m mac_spec]
+           [-O ctl_cmd] [-o option] [-p port] [-Q query_option] [-R address]
+           [-S ctl_path] [-W host:port] [-w local_tun[:remote_tun]]
+           [user@]hostname [command]
+malu@ip-172-31-41-95:~$ ssh
+usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
+           [-D [bind_address:]port] [-E log_file] [-e escape_char]
+           [-F configfile] [-I pkcs11] [-i identity_file]
+           [-J [user@]host[:port]] [-L address] [-l login_name] [-m mac_spec]
+           [-O ctl_cmd] [-o option] [-p port] [-Q query_option] [-R address]
+           [-S ctl_path] [-W host:port] [-w local_tun[:remote_tun]]
+           [user@]hostname [command]
+malu@ip-172-31-41-95:~$ ssh 172.31.37.49
+Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 5.4.0-1092-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Mon Jan 23 12:09:48 UTC 2023
+
+  System load:  0.04              Processes:           100
+  Usage of /:   19.0% of 7.57GB   Users logged in:     1
+  Memory usage: 20%               IP address for eth0: 172.31.37.49
+  Swap usage:   0%
+
+
+38 updates can be applied immediately.
+35 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '20.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+malu@ip-172-31-37-49:~$ exit
+logout
+Connection to 172.31.37.49 closed.
+malu@ip-172-31-41-95:~$ vi myHost
+malu@ip-172-31-41-95:~$ vi mySam.yml
+malu@ip-172-31-41-95:~$ ansible all -i myHost -m ping
+172.31.37.49 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+malu@ip-172-31-41-95:~$ ansible-playbook -i myHost mySamp.yml
+ERROR! the playbook: mySamp.yml could not be found
+malu@ip-172-31-41-95:~$ ansible-playbook -i myHost mySam.yml
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [172.31.37.49]
+
+TASK [Install Apache2] *********************************************************
+^[[Aacchanged: [172.31.37.49]
+
+PLAY RECAP *********************************************************************
+172.31.37.49               : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+malu@ip-172-31-41-95:~$ ^C
+malu@ip-172-31-41-95:~$ 
